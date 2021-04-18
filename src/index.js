@@ -59,6 +59,7 @@ class Game extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
+      listAscending: true
     };
   }
 
@@ -84,6 +85,12 @@ class Game extends React.Component {
     this.setState({
       stepNumber: step,
       xIsNext: (step % 2) === 0,
+    });
+  }
+
+  onAscendingToggle() {
+    this.setState({
+      listAscending: !this.state.listAscending,
     });
   }
 
@@ -124,7 +131,12 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <div>
+            <button onClick={() => this.onAscendingToggle()}>
+              {this.state.listAscending ? 'Show history descending' : 'Show history ascending'}
+            </button>
+          </div>
+          <ol>{this.state.listAscending ? moves : moves.slice().reverse()}</ol>
         </div>
       </div>
     );
