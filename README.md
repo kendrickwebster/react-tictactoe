@@ -1,6 +1,6 @@
-# Intro to React tutorial
+# My sandbox for learning React
 
-This project was created by Kendrick Webster to play with the [Intro to React tutorial](https://reactjs.org/tutorial/tutorial.html) and have a history of the edits made in Git for easy reference.
+This project was created by Kendrick Webster to play with the [Intro to React tutorial](https://reactjs.org/tutorial/tutorial.html) while keeping a history of edits in Git for future reference and review.
 
 All of the optional improvements were completed:
 
@@ -11,7 +11,7 @@ All of the optional improvements were completed:
  5. When someone wins, highlight the three squares that caused the win.
  6. When no one wins, display a message about the result being a draw.
 
-The finished version of the app was deployed to [https://kendrickwebster.github.io/react-tictactoe/](https://kendrickwebster.github.io/react-tictactoe/) using [gh-pages](https://www.npmjs.com/package/gh-pages)
+The finished version of the app was deployed to [https://kendrickwebster.github.io/react-tictactoe/](https://kendrickwebster.github.io/react-tictactoe/) using [gh-pages](https://www.npmjs.com/package/gh-pages) by following [these instructions](https://create-react-app.dev/docs/deployment/#github-pages).
 
 Per the tutorial's "Setup Option 2" instructions, Create React App was used.  A copy of the default README.md that it creates appears below:
 
