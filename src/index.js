@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 function Square(props) {
+  const classes = props.value.isWin ? "square square-winner" : "square";
   return (
-    <button className="square" onClick={props.onClick}>
-      {props.value}
+    <button className={classes} onClick={props.onClick}>
+      {props.value.text}
     </button>
   );
 }
@@ -13,30 +14,37 @@ class Board extends React.Component {
   renderSquare(i) {
     return (
       <Square
+        key={i}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
       />
     );
   }
 
+  renderRow(i) {
+    var cols = [];
+    for (var j = 0; j < 3; j++) {
+      cols.push(this.renderSquare(i*3 + j));
+    }
+    return (
+      <div className="board-row" key={i}>
+        {cols}
+      </div>
+    );
+  }
+
+  renderBoard() {
+    var rows = [];
+    for (var i = 0; i < 3; i++) {
+      rows.push(this.renderRow(i));
+    }
+    return rows;
+  }
+
   render() {
     return (
       <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
+        {this.renderBoard()}
       </div>
     );
   }
@@ -47,24 +55,28 @@ class Game extends React.Component {
     super(props);
     this.state = {
       history: [{
-        squares: Array(9).fill(null),
+        squares: Array(9).fill({text: null, isWin: false}),
+        move: null
       }],
       stepNumber: 0,
       xIsNext: true,
+      listAscending: true
     };
   }
 
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
-    const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
+    const squares = JSON.parse(JSON.stringify(current.squares)); /* deep copy */
+    if (calculateWinner(squares) || squares[i].text) {
       return;
     }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    const nextLetter = this.state.xIsNext ? 'X' : 'O';
+    squares[i] = {text: nextLetter, isWin: false};
     this.setState({
       history: history.concat([{
-        squares: squares
+        squares: squares,
+        move: i
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
@@ -78,15 +90,26 @@ class Game extends React.Component {
     });
   }
 
+  onAscendingToggle() {
+    this.setState({
+      listAscending: !this.state.listAscending,
+    });
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
+    const full = isFull(current.squares);
 
     const moves = history.map((step, move) => {
-      const desc = move ?
-        'Go to move #' + move :
+      const i = step.move;
+      const desc1 = move ?
+        'Go to move #' + move + ' (' + colNum(i) + ',' + rowNum(i) + ')' :
         'Go to game start';
+      const desc = step === current ?
+        <b>{desc1}</b> :
+        desc1;
       return (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
@@ -97,6 +120,8 @@ class Game extends React.Component {
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
+    } else if (full) {
+      status = 'Game result: Draw';
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
@@ -111,7 +136,12 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <div>
+            <button onClick={() => this.onAscendingToggle()}>
+              {this.state.listAscending ? 'Show history descending' : 'Show history ascending'}
+            </button>
+          </div>
+          <ol>{this.state.listAscending ? moves : moves.slice().reverse()}</ol>
         </div>
       </div>
     );
@@ -139,9 +169,32 @@ function calculateWinner(squares) {
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+    if (squares[a].text
+      && squares[a].text === squares[b].text
+      && squares[a].text === squares[c].text)
+    {
+      squares[a].isWin = true;
+      squares[b].isWin = true;
+      squares[c].isWin = true;
+      return squares[a].text;
     }
   }
   return null;
+}
+
+function isFull(squares) {
+  for (let i = 0; i < 9; i++) {
+    if (!squares[i].text) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function colNum(i) {
+  return i % 3 + 1;
+}
+
+function rowNum(i) {
+  return Math.floor(i / 3) + 1;
 }
