@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 function Square(props) {
+  const classes = props.value.isWin ? "square square-winner" : "square";
   return (
-    <button className="square" onClick={props.onClick}>
-      {props.value}
+    <button className={classes} onClick={props.onClick}>
+      {props.value.text}
     </button>
   );
 }
@@ -54,7 +55,7 @@ class Game extends React.Component {
     super(props);
     this.state = {
       history: [{
-        squares: Array(9).fill(null),
+        squares: Array(9).fill({text: null, isWin: false}),
         move: null
       }],
       stepNumber: 0,
@@ -67,10 +68,11 @@ class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
+    if (calculateWinner(squares) || squares[i].text) {
       return;
     }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    const nextLetter = this.state.xIsNext ? 'X' : 'O';
+    squares[i] = {text: nextLetter, isWin: false};
     this.setState({
       history: history.concat([{
         squares: squares,
@@ -164,8 +166,14 @@ function calculateWinner(squares) {
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+    if (squares[a].text
+      && squares[a].text === squares[b].text
+      && squares[a].text === squares[c].text)
+    {
+      squares[a].isWin = true;
+      squares[b].isWin = true;
+      squares[c].isWin = true;
+      return squares[a].text;
     }
   }
   return null;
