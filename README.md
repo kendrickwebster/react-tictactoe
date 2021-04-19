@@ -1,6 +1,6 @@
 # My Sandbox for Learning React
 
-This project was created by Kendrick Webster to play with the [Intro to React tutorial](https://reactjs.org/tutorial/tutorial.html) while keeping a history of edits for future reference and review.
+This project was created by Kendrick Webster to play with the [Intro to React tutorial](https://reactjs.org/tutorial/tutorial.html) while keeping a history of edits for future reference and review.  Although React itself was new to me, web development frameworks in general were not, so the tutorial was easy and fun.
 
 All of the optional self directed practice exercises (improvements) were completed:
 
@@ -13,7 +13,7 @@ All of the optional self directed practice exercises (improvements) were complet
 
 The finished version of the app was deployed to [https://kendrickwebster.github.io/react-tictactoe/](https://kendrickwebster.github.io/react-tictactoe/) using [gh-pages](https://www.npmjs.com/package/gh-pages) by following [these instructions](https://create-react-app.dev/docs/deployment/#github-pages).
 
-Per the tutorial's "Setup Option 2" instructions, Create React App was used.  A copy of the default README.md that it creates appears below:
+So that I could complete the tutorial in my favorite development environment (Ubuntu Linux), I chose the tutorial's "Setup Option 2".  Per it's instructions, Create React App was used.  A copy of the default README.md that it creates appears below:
 
 
 # Getting Started with Create React App
