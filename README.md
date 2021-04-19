@@ -1,3 +1,10 @@
+# Intro to React tutorial
+
+This project was created by Kendrick Webster to play with the [Intro to React tutorial](https://reactjs.org/tutorial/tutorial.html) and have a history of the edits made in Git for easy reference.
+
+Per the "Setup Option 2" instructions, Create React App was used.  A copy of the default README.md that it creates appears below:
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
