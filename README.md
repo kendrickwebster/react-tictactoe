@@ -1,6 +1,6 @@
 # My Sandbox for Learning React
 
-This project was created by Kendrick Webster to play with the [Intro to React tutorial](https://reactjs.org/tutorial/tutorial.html) while keeping a history of edits for future reference and review.  Although React itself was new to me, web development frameworks in general were not, so the tutorial was easy and fun.
+This project was created by Kendrick Webster to play with the [Intro to React tutorial](https://reactjs.org/tutorial/tutorial.html) while keeping a history of edits for future reference and review.
 
 All of the optional self directed practice exercises (improvements) were completed:
 
