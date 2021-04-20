@@ -1,6 +1,6 @@
 # My Sandbox for Learning React
 
-This project was created to keep a history of edits for future reference and review while completing the [Intro to React tutorial](https://reactjs.org/tutorial/tutorial.html) and optional self directed practice exercises:
+This project was created to track changes while completing the [Intro to React tutorial](https://reactjs.org/tutorial/tutorial.html) and optional self directed practice exercises:
 
  1. Display the location for each move in the format (col, row) in the move history list.
  2. Bold the currently selected item in the move list.
@@ -11,7 +11,7 @@ This project was created to keep a history of edits for future reference and rev
 
 The finished version of the app was deployed to [https://kendrickwebster.github.io/react-tictactoe/](https://kendrickwebster.github.io/react-tictactoe/) using [gh-pages](https://www.npmjs.com/package/gh-pages) by following [these instructions](https://create-react-app.dev/docs/deployment/#github-pages).
 
-So that I could complete the tutorial in my favorite development environment (Ubuntu Linux), I chose the tutorial's "Setup Option 2".  Per it's instructions, Create React App was used.  A copy of the default README.md that it creates appears below:
+Per the tutorial's "Setup Option 2" instructions, Create React App was used.  A copy of the default README.md that it creates appears below:
 
 
 # Getting Started with Create React App
